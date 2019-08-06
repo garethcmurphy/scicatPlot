@@ -10,9 +10,10 @@ from scicat_plot import ScicatPlot
 class ScicatVis:
     """visualise catalogue"""
 
-    def run_vis(self):
+    def run_vis(self, tag):
+        os.remove("phs.png")
         search = ScicatSearch()
-        response = search.search_scicat("nicos_00000490", 1)
+        response = search.search_scicat(tag, 1)
         result = response.pop()
         file_name = result["scientificMetadata"]["file_name"]
         pid = result["pid"]
@@ -26,10 +27,13 @@ class ScicatVis:
         attach.attach(pid, file)
 
     def loop(self):
-        pass
+        for i in range(480,490)
+            tag = "nicos_00000"+i.zfill(3)
+            self.run_vis(tag)
 
 def main():
     vis = ScicatVis()
+    tag="nicos_00000490"
     vis.run_vis()
 
 

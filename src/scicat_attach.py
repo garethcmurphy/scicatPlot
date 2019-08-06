@@ -29,11 +29,14 @@ class ScicatAttach:
 
     def get_access_token(self):
         """get access token"""
+        username = "ingestor"
         if platform.system() == 'Darwin':
-            username = "ingestor"
             password = keyring.get_password('scicat', username)
         else:
-            pass
+            with open("config.json") as json_file:
+                data = json.load(json_file)
+                username = data["username"];
+                password = data["password"];
 
         token = ""
 
