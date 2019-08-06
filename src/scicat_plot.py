@@ -9,7 +9,7 @@ class ScicatPlot:
     """plot nexus file """
 
     def __init__(self):
-        self.file_name = "data/nicos_00000332.hdf"
+        self.file_name = "data/nicos_000000332.hdf"
         print("test")
 
     def set_filename(self, file_name):
