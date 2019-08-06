@@ -12,7 +12,10 @@ class ScicatVis:
 
     def run_vis(self, tag):
         """add plot to data catalogue"""
-        os.remove("phs.png")
+        try:
+            os.remove("phs.png")
+        except:
+            print("no existing plot file")
         search = ScicatSearch()
         response = search.search_scicat(tag, 1)
         result = response.pop()
