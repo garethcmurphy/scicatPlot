@@ -1,7 +1,8 @@
 """test"""
-from scicat_search import search_scicat
+from scicat_search import ScicatSearch
 
 
 def test_scicat():
     """test"""
-    assert isinstance(sci.url_base, str)
+    sci = ScicatSearch()
+    assert isinstance(sci.base_url, str)
