@@ -9,11 +9,11 @@ class ScicatAttach:
 
     def login(self):
         """login to scicat"""
-        pass
+        print("login")
 
     def attach(self):
         """attach image to scicat"""
-        pass
+        print("attach")
 
 
 def main():

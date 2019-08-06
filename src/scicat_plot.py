@@ -6,11 +6,11 @@ class ScicatPlot:
     """plot nexus file """
 
     def __init__(self):
-        pass
+        print("test")
 
     def plot(self):
         """plot nexus file """
-        pass
+        print("test")
 
 
 if __name__ == "__main__":
