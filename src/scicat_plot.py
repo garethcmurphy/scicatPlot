@@ -25,7 +25,7 @@ class ScicatPlot:
         marker = 'o'
         markersize = 3
 
-        figp, axp = plt.subplots()
+        _, axp = plt.subplots()
 
         phs, edgesp = np.histogram(pulse_height, bins=200)
         axp.errorbar(edgesp[:-1], phs, lw=1, yerr=np.sqrt(phs),

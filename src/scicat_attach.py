@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
 """attach image to scicat"""
+import platform
+
 import requests
 import keyring
 
@@ -13,18 +16,63 @@ class ScicatAttach:
     def __init__(self):
         self.token = ""
 
+    def get_url(self):
+        """get URL"""
+        uri = self.url_base + self.api + self.url_fragment + "?access_token=" + self.token
+        print(uri)
+        return uri
+
+    def get_access_token(self):
+        """get access token"""
+        if platform.system() == 'Darwin':
+            username = "ingestor"
+            password = keyring.get_password('scicat', username)
+        else:
+            pass
+
+        token = ""
+
+        login_url = self.url_base + self.api + "/Users/login"
+        config = {
+            "username": username,
+            "password": password
+        }
+        response = requests.post(login_url, data=config)
+        print(response.json())
+        token = response.json()
+        self.token = token["id"]
+
+        return token["id"]
+
     def login(self):
         """login to scicat"""
+        self.get_access_token()
         print("login")
 
-    def attach(self):
+    def base64encode(self, file):
+        """base 64 encode a file"""
+        
+
+    def create_payload(self, pid):
+        """create payload""
+        payload = {
+            "thumbnail": "retrieve",
+            "caption": "pulse height spectrum",
+            "datasetId": pid
+        }
+
+    def attach(self, pid):
         """attach image to scicat"""
-        print("attach")
+        post_url = self.url_base + self.api + "Datasets/" + pid + "/datasetattachments"
+        print("attach", post_url)
 
 
 def main():
     """attach image to scicat"""
-    ScicatAttach()
+    attach = ScicatAttach()
+    attach.get_access_token()
+    pid = "feji"
+    attach.attach(pid)
 
 
 if __name__ == "__main__":
