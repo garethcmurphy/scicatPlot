@@ -7,9 +7,9 @@ def test_scicat():
     sci = ScicatAttach()
     assert isinstance(sci.url_base, str)
 
+
 def test_payload():
     """test payload"""
     sci = ScicatAttach()
-    payload = sci.create_payload("xyz")
-    assert ("thumbnail" in payload)
-
+    payload = sci.create_payload("xyz", "x.png")
+    assert "thumbnail" in payload

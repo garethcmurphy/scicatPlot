@@ -14,7 +14,7 @@ class ScicatVis:
         """add plot to data catalogue"""
         try:
             os.remove("phs.png")
-        except:
+        except OSError:
             print("no existing plot file")
         search = ScicatSearch()
         response = search.search_scicat(tag, 1)
@@ -38,6 +38,7 @@ class ScicatVis:
 
 
 def main():
+    """main"""
     vis = ScicatVis()
     tag = "nicos_00000490"
     vis.run_vis(tag)
