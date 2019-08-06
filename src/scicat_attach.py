@@ -2,6 +2,7 @@
 """attach image to scicat"""
 import platform
 
+import base64
 import requests
 import keyring
 
@@ -11,6 +12,8 @@ class ScicatAttach:
     url_base = "https://scicatapi.esss.dk"
     api = "/api/v3/"
     url_fragment = "Datasets"
+    thumbnail = ""
+    file = "data/nicos_0000322.hdf"
     options = {}
 
     def __init__(self):
@@ -51,6 +54,9 @@ class ScicatAttach:
 
     def base64encode(self, file):
         """base 64 encode a file"""
+        with open(self.file, "rb"):
+            self.thumbnail = base64.b64encode(file)
+        return self.thumbnail
 
     def create_payload(self, pid):
         """create payload"""
@@ -59,6 +65,7 @@ class ScicatAttach:
             "caption": "pulse height spectrum",
             "datasetId": pid
         }
+        return payload
 
     def attach(self, pid):
         """attach image to scicat"""
