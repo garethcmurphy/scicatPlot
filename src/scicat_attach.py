@@ -82,15 +82,15 @@ class ScicatAttach:
         return payload
 
     def attach(self, pid, file):
-        self.get_access_token()
         """attach image to scicat"""
+        self.get_access_token()
         quote_pid = urllib.parse.quote_plus(pid)
         post_url = self.url_base + self.api + \
             "Datasets/" + quote_pid + "/datasetattachments" + \
             "?access_token=" + self.token
         payload = self.create_payload(pid, file)
         print("attach", post_url)
-        response = requests.post(post_url,  json=payload)
+        response = requests.post(post_url, json=payload)
         print(response.json())
 
 

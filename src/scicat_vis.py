@@ -11,6 +11,7 @@ class ScicatVis:
     """visualise catalogue"""
 
     def run_vis(self, tag):
+        """add plot to data catalogue"""
         os.remove("phs.png")
         search = ScicatSearch()
         response = search.search_scicat(tag, 1)
@@ -27,14 +28,16 @@ class ScicatVis:
         attach.attach(pid, file)
 
     def loop(self):
-        for i in range(480,490)
+        """loop around files"""
+        for i in range(480, 490):
             tag = "nicos_00000"+i.zfill(3)
             self.run_vis(tag)
 
+
 def main():
     vis = ScicatVis()
-    tag="nicos_00000490"
-    vis.run_vis()
+    tag = "nicos_00000490"
+    vis.run_vis(tag)
 
 
 if __name__ == "__main__":
