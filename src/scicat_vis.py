@@ -12,7 +12,7 @@ class ScicatVis:
 
     def run_vis(self):
         search = ScicatSearch()
-        response = search.search_scicat("nicos_00000332", 1)
+        response = search.search_scicat("nicos_00000490", 1)
         result = response.pop()
         file_name = result["scientificMetadata"]["file_name"]
         pid = result["pid"]
@@ -25,6 +25,8 @@ class ScicatVis:
         file = "phs.png"
         attach.attach(pid, file)
 
+    def loop(self):
+        for 
 
 def main():
     vis = ScicatVis()
