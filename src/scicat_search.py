@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import os
-import requests
 import json
 import urllib
 
+import requests
+
 
 def search_scicat(text, max_number_results):
+    """search scicat"""
     fields = {'text': text}
     limit = {'limit': max_number_results, 'order': "creationTime:desc"}
     fields_encode = urllib.parse.quote(json.dumps(fields))
@@ -25,5 +27,5 @@ if __name__ == "__main__":
     path = result["sourceFolder"]
     oldname = result["scientificMetadata"]["file_name"]
     basename = os.path.basename(oldname)
-    fullpath = os.path.join(path , basename)
+    fullpath = os.path.join(path, basename)
     print(fullpath)

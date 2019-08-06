@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-class scicatPlot:
+"""plot nexus file """
+
+
+class ScicatPlot:
+    """plot nexus file """
+
     def __init__(self):
         pass
 
     def plot(self):
+        """plot nexus file """
         pass
 
 
