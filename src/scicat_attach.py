@@ -51,10 +51,9 @@ class ScicatAttach:
 
     def base64encode(self, file):
         """base 64 encode a file"""
-        
 
     def create_payload(self, pid):
-        """create payload""
+        """create payload"""
         payload = {
             "thumbnail": "retrieve",
             "caption": "pulse height spectrum",

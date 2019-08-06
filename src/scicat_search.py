@@ -6,23 +6,28 @@ import urllib
 
 import requests
 
+class ScicatSearch:
+    base_url = "https://scicatapi.esss.dk"
+    api_url = base_url + "/api/v3/"
+    dataset_url = api_url + "Datasets/"
 
-def search_scicat(text, max_number_results):
-    """search scicat"""
-    fields = {'text': text}
-    limit = {'limit': max_number_results, 'order': "creationTime:desc"}
-    fields_encode = urllib.parse.quote(json.dumps(fields))
-    limit_encode = urllib.parse.quote(json.dumps(limit))
-    dataset_url = "https://scicatapi.esss.dk/api/v3/Datasets/anonymousquery?fields=" + \
-        fields_encode+"&limits="+limit_encode
-    response = requests.get(dataset_url).json()
-    print(len(response), "result found!")
-    return response
+    def search_scicat(self,text, max_number_results):
+        """search scicat"""
+        fields = {'text': text}
+        limit = {'limit': max_number_results, 'order': "creationTime:desc"}
+        fields_encode = urllib.parse.quote(json.dumps(fields))
+        limit_encode = urllib.parse.quote(json.dumps(limit))
+        dataset_url = self.dataset_url +"anonymousquery?fields=" + \
+            fields_encode+"&limits="+limit_encode
+        response = requests.get(dataset_url).json()
+        print(len(response), "result found!")
+        return response
 
 
 def main():
     """main"""
-    response = search_scicat("nicos_00000490", 1)
+    search = ScicatSearch()
+    response = search.search_scicat("nicos_00000332", 1)
     result = response.pop()
     print(result["pid"])
     print(result["pid"])
