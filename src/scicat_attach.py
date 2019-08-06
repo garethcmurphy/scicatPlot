@@ -1,11 +1,17 @@
 """attach image to scicat"""
+import requests
+import keyring
 
 
 class ScicatAttach:
     """attach image to scicat"""
+    url_base = "https://scicatapi.esss.dk"
+    api = "/api/v3/"
+    url_fragment = "Datasets"
+    options = {}
 
     def __init__(self):
-        pass
+        self.token = ""
 
     def login(self):
         """login to scicat"""

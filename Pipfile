@@ -8,6 +8,10 @@ pylint = "*"
 pytest = "*"
 
 [packages]
+h5py = "*"
+matplotlib = "*"
+numpy = "*"
+keyring = "*"
 
 [requires]
 python_version = "3.7"
