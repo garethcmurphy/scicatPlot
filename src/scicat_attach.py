@@ -2,6 +2,7 @@
 """attach image to scicat"""
 import platform
 import urllib
+import json
 
 import base64
 import requests
@@ -35,8 +36,8 @@ class ScicatAttach:
         else:
             with open("config.json") as json_file:
                 data = json.load(json_file)
-                username = data["username"];
-                password = data["password"];
+                username = data["username"]
+                password = data["password"]
 
         token = ""
 
