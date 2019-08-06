@@ -26,7 +26,7 @@ class ScicatVis:
         attach.attach(pid, file)
 
     def loop(self):
-        for 
+        pass
 
 def main():
     vis = ScicatVis()
