@@ -30,7 +30,8 @@ class ScicatVis:
         hostname = socket.gethostname()
         if hostname == "CI0020036":
             path="data/"
-        file_path = os.path.join(path, file_name)
+        file_path = os.path.join(path, basename)
+        print(file_path)
         plot.set_filename(file_path)
         plot.plot()
         attach = ScicatAttach()
