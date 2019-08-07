@@ -30,7 +30,7 @@ def main():
     """main"""
     search = ScicatSearch()
     response = search.search_scicat("nicos_00000332", 1)
-    if len(reponse) == 0:
+    if len(response) == 0:
         print("no entries found in scicat")
         return 0
     result = response.pop()
