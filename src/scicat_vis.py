@@ -40,7 +40,7 @@ class ScicatVis:
 
     def loop(self):
         """loop around files"""
-        for i in range(401, 480):
+        for i in range(404, 480):
 
             tag = "nicos_00000"+str(i).zfill(3)
             self.run_vis(tag)
