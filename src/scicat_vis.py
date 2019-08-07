@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """visualise catalogue"""
 import os
+import socket
+
 
 from scicat_search import ScicatSearch
 from scicat_attach import ScicatAttach
@@ -24,7 +26,12 @@ class ScicatVis:
         basename = os.path.basename(file_name)
 
         plot = ScicatPlot()
-        plot.set_filename("data/"+basename)
+        path =result["sourceFolder"]
+        hostname = socket.gethostname()
+        if hostname == "CI0020036":
+            path="data/"
+        file_path = os.path.join(path, file_name)
+        plot.set_filename(file_path)
         plot.plot()
         attach = ScicatAttach()
         file = "phs.png"
