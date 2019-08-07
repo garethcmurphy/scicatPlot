@@ -21,7 +21,14 @@ class ScicatPlot:
         if not h5py.is_hdf5(self.file_name):
             raise ValueError('Not an hdf5 file')
         file = h5py.File(self.file_name, "r")
-        pulse_height = file["/entry/monitor_1/events/event_id"][:]
+        event_path = "/entry/monitor_1/events/event_id"
+        if event_path in file:
+            pass
+        else:
+            print("path missing")
+            return 0
+
+        pulse_height = file[event_path][:]
 
         mfc = 'cornflowerblue'
         marker = 'o'
