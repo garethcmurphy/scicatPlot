@@ -49,7 +49,7 @@ def main():
     """main"""
     vis = ScicatVis()
     tag = "nicos_00000490"
-    vis.run_vis(tag)
+    vis.loop()
 
 
 if __name__ == "__main__":
