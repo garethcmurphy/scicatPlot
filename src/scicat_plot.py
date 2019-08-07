@@ -19,7 +19,8 @@ class ScicatPlot:
     def plot(self):
         """read nexus file"""
         if not h5py.is_hdf5(self.file_name):
-            raise ValueError('Not an hdf5 file')
+            print("Invalid file", self.file_name)
+            return 0
         file = h5py.File(self.file_name, "r")
         event_path = "/entry/monitor_1/events/event_id"
         if event_path in file:
