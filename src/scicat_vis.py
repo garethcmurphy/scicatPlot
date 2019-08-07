@@ -20,6 +20,9 @@ class ScicatVis:
             print("no existing plot file")
         search = ScicatSearch()
         response = search.search_scicat(tag, 1)
+        if len(response) == 0:
+            print("no results found, continuing")
+            return 0
         result = response.pop()
         file_name = result["scientificMetadata"]["file_name"]
         pid = result["pid"]
