@@ -18,6 +18,8 @@ class ScicatPlot:
 
     def plot(self):
         """read nexus file"""
+        if not h5py.is_hdf5(self.file_name):
+            raise ValueError('Not an hdf5 file')
         file = h5py.File(self.file_name, "r")
         pulse_height = file["/entry/monitor_1/events/event_id"][:]
 
