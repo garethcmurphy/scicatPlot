@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """attach image to scicat"""
+import os 
 import platform
 import urllib
 import json
@@ -88,7 +89,7 @@ class ScicatAttach:
         post_url = self.url_base + self.api + \
             "Datasets/" + quote_pid + "/datasetattachments" + \
             "?access_token=" + self.token
-        if path.exists(file):
+        if os.path.exists(file):
             pass
         else:
             print("cannot find",file)
