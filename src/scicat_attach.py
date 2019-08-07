@@ -88,6 +88,11 @@ class ScicatAttach:
         post_url = self.url_base + self.api + \
             "Datasets/" + quote_pid + "/datasetattachments" + \
             "?access_token=" + self.token
+        if path.exists(file):
+            pass
+        else:
+            print("cannot find",file)
+            return 0
         payload = self.create_payload(pid, file)
         print("attach", post_url)
         response = requests.post(post_url, json=payload)
