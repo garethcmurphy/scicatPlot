@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """attach image to scicat"""
-import os 
+import os
 import platform
 import urllib
 import json
@@ -92,7 +92,7 @@ class ScicatAttach:
         if os.path.exists(file):
             pass
         else:
-            print("cannot find",file)
+            print("cannot find", file)
             return 0
         payload = self.create_payload(pid, file)
         print("attach", post_url)

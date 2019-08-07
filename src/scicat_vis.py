@@ -20,7 +20,7 @@ class ScicatVis:
             print("no existing plot file")
         search = ScicatSearch()
         response = search.search_scicat(tag, 1)
-        if len(response) == 0:
+        if not response:
             print("no results found, continuing")
             return 0
         result = response.pop()
@@ -29,10 +29,10 @@ class ScicatVis:
         basename = os.path.basename(file_name)
 
         plot = ScicatPlot()
-        path =result["sourceFolder"]
+        path = result["sourceFolder"]
         hostname = socket.gethostname()
         if hostname == "CI0020036":
-            path="data/"
+            path = "data/"
         file_path = os.path.join(path, basename)
         print(file_path)
         plot.set_filename(file_path)
@@ -52,7 +52,6 @@ class ScicatVis:
 def main():
     """main"""
     vis = ScicatVis()
-    tag = "nicos_00000490"
     vis.loop()
 
 

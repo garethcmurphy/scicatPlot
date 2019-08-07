@@ -9,6 +9,7 @@ start = "./src/scicat_vis.py"
 [dev-packages]
 pylint = "*"
 pytest = "*"
+"autopep8" = "*"
 
 [packages]
 h5py = "*"
