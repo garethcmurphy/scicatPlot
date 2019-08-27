@@ -87,7 +87,7 @@ class ScicatAttach:
         self.get_access_token()
         quote_pid = urllib.parse.quote_plus(pid)
         post_url = self.url_base + self.api + \
-            "Datasets/" + quote_pid + "/datasetattachments" + \
+            "Datasets/" + quote_pid + "/attachments" + \
             "?access_token=" + self.token
         if os.path.exists(file):
             pass
