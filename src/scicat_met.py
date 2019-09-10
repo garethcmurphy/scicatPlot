@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """plot nexus file """
+import os
+
 import h5py
+import pprint
 
 
 class ScicatMet:
     """get metadata from nexus file """
 
     def __init__(self):
+        self.metadata_dict = {}
         self.file_name = "data/nicos_00000332.hdf"
         self.file_name = "data/nicos_00000490.hdf"
         print("test")
@@ -20,11 +24,27 @@ class ScicatMet:
         val = ""
         if path in file:
             val = file[path][()]
+            base = os.path.basename(path)
+            self.metadata_dict[base] = val
             print(path, val)
         else:
             print("path missing")
             return 0
         return val
+    
+    def get_array(self, file, path):
+        """get dataset from file"""
+        val = ""
+        if path in file:
+            val = file[path][()]
+            base = os.path.basename(path)
+            self.metadata_dict[base] = val[:]
+            print(path, val)
+        else:
+            print("path missing")
+            return 0
+        return val
+
 
     def get_metadata(self):
         """read nexus file"""
@@ -40,13 +60,17 @@ class ScicatMet:
             return 0
 
         path = "/entry/title"
-        title = self.get_dataset(file, path)
+        self.get_dataset(file, path)
         path = "/entry/sample/description"
-        sample_description = self.get_dataset(file, path)
+        self.get_dataset(file, path)
         path = "/entry/start_time"
-        start_time = self.get_dataset(file, path)
+        self.get_dataset(file, path)
         path = "/entry/instrument/tilting_angle_2/velocity/value"
-        tilting_angle_2 = self.get_dataset(file, path)
+        self.get_array(file, path)
+
+        print("\n\n")
+        pp=pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.metadata_dict)
 
 
 def main():
