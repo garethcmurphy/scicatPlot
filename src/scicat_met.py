@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """plot nexus file """
 import os
+import pprint
 
 import h5py
-import pprint
 
 
 class ScicatMet:
@@ -20,16 +20,43 @@ class ScicatMet:
         """setter for filename"""
         self.file_name = file_name
 
-    def get_dataset(self,  key, path):
+    def set_metadata(self, scicat_type, value, unit):
+        """set metadata"""
+        obj = {"type": scicat_type, "unit": unit, "value": value}
+        return obj
+
+    def get_attribute(self, key, path):
         """get dataset from file"""
         val = ""
         if path in self.file:
-            val = self.file[path][()]
-            base = os.path.basename(path)
-            self.metadata_dict[key] = val
+            obj = self.file[path]
+            val = obj.attrs[key]
+            self.metadata_dict[key] = self.set_metadata(
+                scicat_type="string", unit="", value=val)
             print(path, val)
         else:
-            print("path missing")
+            print("path missing", path)
+            return 0
+        return val
+
+    def get_dataset(self, key, path):
+        """get dataset from file"""
+        val = ""
+        if path in self.file:
+            dset = self.file[path]
+            unit = ""
+            print(dset.attrs)
+            scicat_type = "string"
+            if "units" in dset.attrs:
+                # print(dset.attrs["units"])
+                scicat_type = "measurement"
+                unit = dset.attrs["units"]
+            val = dset[()]
+            self.metadata_dict[key] = self.set_metadata(
+                scicat_type=scicat_type, unit=unit, value=val)
+            print(path, val)
+        else:
+            print("path missing", path)
             return 0
         return val
 
@@ -59,10 +86,10 @@ class ScicatMet:
         self.get_dataset("sample_description", path)
         path = "/entry/start_time"
         self.get_dataset("start_time", path)
-        path = "/file_name"
-        self.get_dataset("start_time", path)
+        path = "/"
+        self.get_attribute("file_name", path)
 
-        for i in range(9):
+        for i in range(1, 9):
             path = "/entry/instrument/chopper_"+str(i)+"/radius"
             self.get_dataset("chopper_"+str(i)+"_radius", path)
 
