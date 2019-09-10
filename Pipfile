@@ -10,6 +10,7 @@ start = "./src/scicat_vis.py"
 pylint = "*"
 pytest = "*"
 "autopep8" = "*"
+rope = "*"
 
 [packages]
 h5py = "*"
