@@ -26,7 +26,7 @@ class ScicatMet:
             return 0
         return val
 
-    def plot(self):
+    def get_metadata(self):
         """read nexus file"""
         if not h5py.is_hdf5(self.file_name):
             print("Invalid file", self.file_name)
@@ -52,7 +52,7 @@ class ScicatMet:
 def main():
     """main"""
     sci = ScicatMet()
-    sci.plot()
+    sci.get_metadata()
 
 
 if __name__ == "__main__":
