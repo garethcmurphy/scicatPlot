@@ -5,7 +5,11 @@ import pprint
 
 import h5py
 
+import requests
+
 from scicat_attach import ScicatAttach
+from scicat_search import ScicatSearch
+from get_api import GetApi
 
 
 class ScicatMet:
@@ -106,9 +110,24 @@ class ScicatMet:
 
     def post_metadata(self):
         """post to scicat"""
-        login = SciCatAttach()
+        search = ScicatSearch()
+        fragment = os.path.basename(self.file_name).replace(".hdf", "")
+        print(fragment)
+        response = search.search_scicat(fragment, 1)
+        print(response)
+        result = response[0]
+        login = ScicatAttach()
         token = login.get_access_token()
         print(token)
+        updated_metadata = result
+        updated_metadata["scientificMetadata"] = self.metadata_dict
+        print(updated_metadata)
+        api = GetApi()
+        api = api.get()
+        url = api+ "api/v3/Datasets/updateScientificMetadata?access_token="+token
+        print(url)
+        response = requests.post(url, json=updated_metadata)
+        print(response)
 
 
 def main():

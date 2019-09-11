@@ -15,7 +15,7 @@ class ScicatSearch:
     def __init__(self):
         api = GetApi()
         self.base_url = api.get()
-        self.api_url = self.base_url + "/api/v3/"
+        self.api_url = self.base_url + "api/v3/"
         self.dataset_url = self.api_url + "Datasets/"
 
     def search_scicat(self, text, max_number_results):
@@ -26,6 +26,7 @@ class ScicatSearch:
         limit_encode = urllib.parse.quote(json.dumps(limit))
         dataset_url = self.dataset_url + "anonymousquery?fields=" + \
             fields_encode+"&limits="+limit_encode
+        print(dataset_url)
         response = requests.get(dataset_url).json()
         print(len(response), "result found!")
         return response
