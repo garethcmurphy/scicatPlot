@@ -5,6 +5,8 @@ import pprint
 
 import h5py
 
+from scicat_attach import ScicatAttach
+
 
 class ScicatMet:
     """get metadata from nexus file """
@@ -104,12 +106,16 @@ class ScicatMet:
 
     def post_metadata(self):
         """post to scicat"""
+        login = SciCatAttach()
+        token = login.get_access_token()
+        print(token)
 
 
 def main():
     """main"""
     sci = ScicatMet()
     sci.get_metadata()
+    sci.post_metadata()
 
 
 if __name__ == "__main__":
