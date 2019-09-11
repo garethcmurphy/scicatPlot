@@ -92,6 +92,8 @@ class ScicatMet:
         for i in range(1, 9):
             path = "/entry/instrument/chopper_"+str(i)+"/radius"
             self.get_dataset("chopper_"+str(i)+"_radius", path)
+            path = "/entry/instrument/chopper_"+str(i)+"/name"
+            self.get_dataset("chopper_"+str(i)+"_name", path)
 
         #path = "/entry/instrument/tilting_angle_2/velocity/value"
         # self.get_array(path)
