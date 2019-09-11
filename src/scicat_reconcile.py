@@ -27,11 +27,9 @@ class ScicatReconcile:
 
     def walk_tree(self):
         """walk tree find files and query scicat"""
-        pass
 
     def report_missing(self):
         """report missing"""
-        pass
 
 
 def main():
