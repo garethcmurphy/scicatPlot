@@ -5,13 +5,18 @@ import json
 import urllib
 
 import requests
+from get_api import GetApi
 
 
 class ScicatSearch:
     """scicat search"""
-    base_url = "https://scicatapi.esss.dk"
-    api_url = base_url + "/api/v3/"
-    dataset_url = api_url + "Datasets/"
+    base_url = ""
+
+    def __init__(self):
+        api = GetApi()
+        self.base_url = api.get()
+        self.api_url = self.base_url + "/api/v3/"
+        self.dataset_url = self.api_url + "Datasets/"
 
     def search_scicat(self, text, max_number_results):
         """search scicat"""
@@ -29,13 +34,12 @@ class ScicatSearch:
 def main():
     """main"""
     search = ScicatSearch()
-    response = search.search_scicat("nicos_00000332", 1)
+    response = search.search_scicat("nicos_00000490", 1)
     print("response length", len(response))
     if not response:
         print("no entries found in scicat")
         return 0
-    result = response.pop()
-    print(result["pid"])
+    result = response[0]
     print(result["pid"])
     path = result["sourceFolder"]
     oldname = result["scientificMetadata"]["file_name"]

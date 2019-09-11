@@ -101,6 +101,9 @@ class ScicatMet:
         print("\n\n")
         printer = pprint.PrettyPrinter(indent=4)
         printer.pprint(self.metadata_dict)
+    
+    def post_metadata(self):
+        pass
 
 
 def main():
