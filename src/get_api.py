@@ -7,7 +7,7 @@ class GetApi:
 
     def __init__(self):
         self.api = "https://scicat.esss.se/"
-        self.api = "http://localhost:3000/"
+        self.api = "http://127.0.0.1:3000/"
 
     def get(self):
         """get api"""

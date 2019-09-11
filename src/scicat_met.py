@@ -124,6 +124,7 @@ class ScicatMet:
         print(updated_metadata)
         api = GetApi()
         api = api.get()
+        # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
         url = api+ "api/v3/Datasets/updateScientificMetadata?access_token="+token
         print(url)
         response = requests.post(url, json=updated_metadata)
