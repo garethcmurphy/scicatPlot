@@ -124,7 +124,7 @@ class ScicatMet:
         print(updated_metadata)
         api = GetApi()
         api = api.get()
-        assert len(token), 64
+        assert len(token) == 64
         # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
         url = api + "api/v3/Datasets/updateScientificMetadata?access_token="+token
         print(url)
