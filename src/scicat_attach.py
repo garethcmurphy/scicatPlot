@@ -62,6 +62,10 @@ class ScicatAttach:
     def base64encode(self, file):
         """base 64 encode a file"""
         file = "phs.png"
+        if os.path.exists(file):
+            pass
+        else:
+            return self.thumbnail
         self.header = "data:image/png;base64,"
         with open(file, 'rb') as image_file:
             data = image_file.read()
