@@ -1,10 +1,8 @@
 # scicatPlot
 
-* Query data catalogue for data files by name
-* Create plots automatically
-* Upload as attachments to catalogue
-
-
+- Query data catalogue for data files by name
+- Create plots automatically
+- Upload as attachments to catalogue
 
 ## Getting Started
 
@@ -22,13 +20,11 @@ requests
 
 ### Installing
 
-
 How to install
 
 ```
 pipenv install
 ```
-
 
 ```
 pipenv run start
@@ -37,8 +33,6 @@ pipenv run start
 ## Running the tests
 
 Explain how to run the automated tests for this system
-
-
 
 ```
 pytest
@@ -58,7 +52,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Pipenv](https://github.com/pypa/pipenv) - Python development framework
+- [Pipenv](https://github.com/pypa/pipenv) - Python development framework
 
 ## Contributing
 
@@ -66,11 +60,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Gareth Murphy** - *Initial work* - [garethcmurphy](https://github.com/garethcmurphy)
+- **Gareth Murphy** - _Initial work_ - [garethcmurphy](https://github.com/garethcmurphy)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -80,7 +74,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc
