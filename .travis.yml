@@ -1,9 +1,12 @@
 language: python
 python:
-  - '3.6'
+  - "3.7"
+  - "3.7-dev" # 3.7 development branch
+  - "3.8-dev" # 3.8 development branch
+  - "nightly" # nightly build
 install:
-  - 'pip install pipenv'
-  - 'pipenv install'
-script: 'python -m pytest '
+  - "pip install pipenv"
+  - "pipenv install"
+script: "python -m pytest "
 after_success:
-  - 'python-codacy-coverage -r coverage.xml'
+  - "python-codacy-coverage -r coverage.xml"
