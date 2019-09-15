@@ -1,5 +1,7 @@
 # scicatPlot
 
+[![Build Status](https://travis-ci.org/garethcmurphy/scicatPlot.svg?branch=master)](https://travis-ci.org/garethcmurphy/scicatPlot)
+
 - Query data catalogue for data files by name
 - Create plots automatically
 - Upload as attachments to catalogue
