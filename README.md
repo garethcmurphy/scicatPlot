@@ -5,7 +5,6 @@
 * Upload as attachments to catalogue
 
 
-One Paragraph of project description goes here
 
 ## Getting Started
 
@@ -59,7 +58,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Pipenv](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Pipenv](https://github.com/pypa/pipenv) - Python development framework
 
 ## Contributing
 
