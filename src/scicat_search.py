@@ -26,7 +26,7 @@ class ScicatSearch:
         limit_encode = urllib.parse.quote(json.dumps(limit))
         dataset_url = self.dataset_url + "anonymousquery?fields=" + \
             fields_encode+"&limits="+limit_encode
-        print(dataset_url)
+        # print(dataset_url)
         response = requests.get(dataset_url).json()
         print(len(response), "result found!")
         return response
