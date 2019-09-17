@@ -19,6 +19,7 @@ numpy = "*"
 keyring = "*"
 requests = "*"
 pytest-cov = "*"
+visens = "*"
 
 [requires]
 python_version = "3.7"
