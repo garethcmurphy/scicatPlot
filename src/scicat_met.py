@@ -4,7 +4,6 @@ import os
 import pprint
 
 import h5py
-import numpy as np
 
 import requests
 
