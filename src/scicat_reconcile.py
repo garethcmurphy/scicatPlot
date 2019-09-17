@@ -5,14 +5,15 @@ import json
 import urllib
 
 import requests
+from scicat_search import ScicatSearch
+from get_api import GetApi
 
 
 class ScicatReconcile:
     """scicat search"""
-    base_url = "https://scicatapi.esss.dk"
-    api_url = base_url + "/api/v3/"
-    dataset_url = api_url + "Datasets/"
+    
     data_directory = "./data/"
+    missing = []
 
     def search_scicat(self, text, max_number_results):
         """search scicat"""
@@ -20,7 +21,9 @@ class ScicatReconcile:
         limit = {'limit': max_number_results, 'order': "creationTime:desc"}
         fields_encode = urllib.parse.quote(json.dumps(fields))
         limit_encode = urllib.parse.quote(json.dumps(limit))
-        dataset_url = self.dataset_url + "anonymousquery?fields=" + \
+        api = GetApi()
+        api_url = api.get()
+        dataset_url = api_url + "/api/v3/Datasets/" + "anonymousquery?fields=" + \
             fields_encode+"&limits="+limit_encode
         response = requests.get(dataset_url).json()
         print(len(response), "result found!")
@@ -29,9 +32,16 @@ class ScicatReconcile:
     def walk_tree(self):
         """walk tree find files and query scicat"""
         files = os.listdir(self.data_directory)
-        print(files)
+        for file in files:
+            print(file)
+            search = ScicatSearch()
+            result = search.search_scicat(file, 1)
+            print(result)
+            print(result[0]["sourceFolder"])
 
     def report_missing(self):
+        for file in self.missing:
+            print(file)
         """report missing"""
 
 

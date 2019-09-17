@@ -4,6 +4,7 @@ import os
 import pprint
 
 import h5py
+import numpy as np
 
 import requests
 
@@ -66,6 +67,13 @@ class ScicatMet:
             return 0
         return val
 
+    def get_ave_max_min(self, array):
+        maximum = max(array)
+        mean = sum(array)/len(array)
+        minimum = min(array)
+        return maximum, mean, minimum
+
+
     def get_array(self, path):
         """get dataset from file"""
         val = ""
@@ -73,6 +81,7 @@ class ScicatMet:
             val = self.file[path][()]
             base = os.path.basename(path)
             self.metadata_dict[base] = val[:]
+
             print(path, val)
         else:
             print("path missing", path)
@@ -136,7 +145,7 @@ def main():
     """main"""
     sci = ScicatMet()
     sci.get_metadata()
-    sci.post_metadata()
+    # sci.post_metadata()
 
 
 if __name__ == "__main__":
