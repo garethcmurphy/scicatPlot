@@ -11,7 +11,6 @@ from get_api import GetApi
 
 class ScicatReconcile:
     """scicat search"""
-    
     data_directory = "./data/"
     missing = []
 
@@ -33,22 +32,28 @@ class ScicatReconcile:
         """walk tree find files and query scicat"""
         files = os.listdir(self.data_directory)
         for file in files:
-            print(file)
+            tag = file.strip(".hdf")
+            print(tag)
             search = ScicatSearch()
-            result = search.search_scicat(file, 1)
-            print(result)
-            print(result[0]["sourceFolder"])
+            result = search.search_scicat(tag, 1)
+            # print(result)
+            if len(result) > 0:
+                print(result[0]["sourceFolder"])
+            else:
+                self.missing.append(file)
 
     def report_missing(self):
+        """report missing"""
+        print("missing files")
         for file in self.missing:
             print(file)
-        """report missing"""
 
 
 def main():
     """main"""
-    reconcile = ScicatReconcile()
+    reconcile=ScicatReconcile()
     reconcile.walk_tree()
+    reconcile.report_missing()
 
 
 if __name__ == "__main__":

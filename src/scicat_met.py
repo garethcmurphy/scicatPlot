@@ -67,11 +67,15 @@ class ScicatMet:
         return val
 
     def get_ave_max_min(self, array):
+        """get max mean and min"""
         maximum = max(array)
         mean = sum(array)/len(array)
         minimum = min(array)
         return maximum, mean, minimum
 
+
+    def look_for_arrays(self):
+        """check which arrays are populated"""
 
     def get_array(self, path):
         """get dataset from file"""
