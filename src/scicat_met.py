@@ -104,6 +104,10 @@ class ScicatMet:
         self.get_dataset("title", path)
         path = "/entry/sample/description"
         self.get_dataset("sample_description", path)
+        path = "/entry/sample/name"
+        self.get_dataset("sample_name", path)
+        path = "/entry/sample/chemical_formula"
+        self.get_dataset("chemical_formula", path)
         path = "/entry/start_time"
         self.get_dataset("start_time", path)
         path = "/"
