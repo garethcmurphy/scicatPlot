@@ -20,6 +20,7 @@ class ScicatMet:
         self.file_name = "data/nicos_00000332.hdf"
         self.file_name = "data/nicos_00000490.hdf"
         self.file_name = "/nfs/groups/beamlines/v20/DD1F5G/nicos_00000764.hdf"
+        self.file_name = "data/nicos_00000764.hdf"
         self.file = ""
         print(self.file_name)
 
