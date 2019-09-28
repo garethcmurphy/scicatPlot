@@ -19,8 +19,9 @@ class ScicatMet:
         self.metadata_dict = {}
         self.file_name = "data/nicos_00000332.hdf"
         self.file_name = "data/nicos_00000490.hdf"
+        self.file_name = "/nfs/groups/beamlines/v20/DD1F5G/nicos_00000764.hdf"
         self.file = ""
-        print("test")
+        print(self.file_name)
 
     def set_filename(self, file_name):
         """setter for filename"""
@@ -148,7 +149,7 @@ def main():
     """main"""
     sci = ScicatMet()
     sci.get_metadata()
-    # sci.post_metadata()
+    sci.post_metadata()
 
 
 if __name__ == "__main__":
