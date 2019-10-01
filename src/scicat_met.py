@@ -2,6 +2,7 @@
 """plot nexus file """
 import os
 import pprint
+import glob
 
 import h5py
 
@@ -14,6 +15,7 @@ from get_api import GetApi
 
 class ScicatMet:
     """get metadata from nexus file """
+    files = []
 
     def __init__(self):
         self.metadata_dict = {}
@@ -73,7 +75,6 @@ class ScicatMet:
         minimum = min(array)
         return maximum, mean, minimum
 
-
     def look_for_arrays(self):
         """check which arrays are populated"""
 
@@ -102,10 +103,18 @@ class ScicatMet:
         self.get_dataset("title", path)
         path = "/entry/sample/description"
         self.get_dataset("sample_description", path)
+        path = "/entry/sample/chemical_formula"
+        self.get_dataset("sample_description", path)
         path = "/entry/start_time"
         self.get_dataset("start_time", path)
         path = "/"
         self.get_attribute("file_name", path)
+
+        scratch = self.file_name.split("_").pop()
+        run_number = int(scratch[0:-4])
+
+        # run_number = 3
+        self.metadata_dict["runNumber"] = self.set_metadata(scicat_type="number", value=run_number , unit="")
 
         for i in range(1, 9):
             path = "/entry/instrument/chopper_"+str(i)+"/radius"
@@ -143,11 +152,24 @@ class ScicatMet:
         response = requests.put(url, json=updated_metadata)
         print(response)
 
+    def get_files(self, my_dir):
+        """get files """
+        self.files = glob.glob(my_dir + '/**.*', recursive=True)
+        return self.files
+
+    def loop(self):
+        directory_name = "./data"
+        self.get_files(directory_name)
+        for file in self.files:
+            self.file_name = file
+            print(file)
+            self.get_metadata()
+
 
 def main():
     """main"""
     sci = ScicatMet()
-    sci.get_metadata()
+    sci.loop()
     # sci.post_metadata()
 
 
