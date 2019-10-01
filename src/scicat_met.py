@@ -21,8 +21,10 @@ class ScicatMet:
         self.metadata_dict = {}
         self.file_name = "data/nicos_00000332.hdf"
         self.file_name = "data/nicos_00000490.hdf"
+        self.file_name = "/nfs/groups/beamlines/v20/DD1F5G/nicos_00000764.hdf"
+        self.file_name = "data/nicos_00000764.hdf"
         self.file = ""
-        print("test")
+        print(self.file_name)
 
     def set_filename(self, file_name):
         """setter for filename"""
@@ -105,6 +107,10 @@ class ScicatMet:
         self.get_dataset("sample_description", path)
         path = "/entry/sample/chemical_formula"
         self.get_dataset("sample_description", path)
+        path = "/entry/sample/name"
+        self.get_dataset("sample_name", path)
+        path = "/entry/sample/chemical_formula"
+        self.get_dataset("chemical_formula", path)
         path = "/entry/start_time"
         self.get_dataset("start_time", path)
         path = "/"

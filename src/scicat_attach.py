@@ -10,10 +10,12 @@ import requests
 import keyring
 
 
+from get_api import GetApi
+
 class ScicatAttach:
     """attach image to scicat"""
-    url_base = "https://scicatapi.esss.dk"
-    api = "/api/v3/"
+    url_base = ""
+    api = "api/v3/"
     url_fragment = "Datasets"
     thumbnail = ""
     file = "data/nicos_00000332.hdf"
@@ -21,6 +23,8 @@ class ScicatAttach:
     header = ""
 
     def __init__(self):
+        api = GetApi()
+        self.url_base = api.get()
         self.token = ""
 
     def get_url(self):
@@ -47,6 +51,7 @@ class ScicatAttach:
             "username": username,
             "password": password
         }
+        print(password)
         response = requests.post(login_url, data=config)
         print(response.json())
         token = response.json()
