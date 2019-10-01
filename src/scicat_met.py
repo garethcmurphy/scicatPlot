@@ -164,6 +164,7 @@ class ScicatMet:
         return self.files
 
     def loop(self):
+        """loop files"""
         directory_name = "./data"
         self.get_files(directory_name)
         for file in self.files:
