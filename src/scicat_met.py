@@ -120,7 +120,7 @@ class ScicatMet:
         run_number = int(scratch[0:-4])
 
         # run_number = 3
-        self.metadata_dict["runNumber"] = self.set_metadata(scicat_type="number", value=run_number , unit="")
+        self.metadata_dict["runNumber"] = self.set_metadata(scicat_type="number", value=run_number, unit="")
 
         for i in range(1, 9):
             path = "/entry/instrument/chopper_"+str(i)+"/radius"
