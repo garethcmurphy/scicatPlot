@@ -96,6 +96,13 @@ class ScicatMet:
 
     def get_metadata(self):
         """read nexus file"""
+        stats = os.stat(self.file_name)
+        if stats.st_size < 6048:
+            print("Invalid file", self.file_name)
+            print("file size", stats.st_size)
+            return 0
+
+
         if not h5py.is_hdf5(self.file_name):
             print("Invalid file", self.file_name)
             return 0
@@ -161,6 +168,8 @@ class ScicatMet:
     def get_files(self, my_dir):
         """get files """
         self.files = glob.glob(my_dir + '/**.*', recursive=True)
+        print("getting files")
+        print(self.files)
         return self.files
 
     def loop(self):
