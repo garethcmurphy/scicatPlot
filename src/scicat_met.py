@@ -8,7 +8,7 @@ import h5py
 
 import requests
 
-from scicat_attach import ScicatAttach
+from scicat_login import Login
 from scicat_search import ScicatSearch
 from get_api import GetApi
 
@@ -16,6 +16,7 @@ from get_api import GetApi
 class ScicatMet:
     """get metadata from nexus file """
     files = []
+    token = ""
 
     def __init__(self):
         self.metadata_dict = {}
@@ -149,18 +150,15 @@ class ScicatMet:
         response = search.search_scicat(fragment, 1)
         print(response)
         result = response[0]
-        login = ScicatAttach()
-        token = login.get_access_token()
-        print(token)
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
         api = GetApi()
         api = api.api
-        assert len(token) == 64
+        assert len(self.token) == 64
         # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
         url = os.path.join(
-            api, "/Datasets/updateScientificMetadata?access_token="+token)
+            api, "/Datasets/updateScientificMetadata?access_token="+self.token)
         print(url)
         response = requests.put(url, json=updated_metadata)
         print(response)
@@ -174,6 +172,8 @@ class ScicatMet:
 
     def loop(self):
         """loop files"""
+        login = Login()
+        self.token = login.get_access_token()
         directory_name = "./data"
         directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
         self.get_files(directory_name)
@@ -188,7 +188,6 @@ def main():
     """main"""
     sci = ScicatMet()
     sci.loop()
-    # sci.post_metadata()
 
 
 if __name__ == "__main__":
