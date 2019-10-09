@@ -36,7 +36,8 @@ class SciCatOrig:
 
     def post(self):
         """post to scicat"""
-        # post= requests.post(self.uri)
+        response = requests.post(self.uri, json=self.orig)
+        print(response.json())
 
     def create_orig(self, pid="vjdfk", file="hjkfe"):
         """post to scicat"""

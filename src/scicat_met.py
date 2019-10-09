@@ -85,7 +85,6 @@ class ScicatMet:
         val = ""
         if path in self.file:
             val = self.file[path][()]
-            base = os.path.basename(path)
             # self.metadata_dict[base] = val[:]
 
             print(path, val)

@@ -12,6 +12,7 @@ import keyring
 
 from get_api import GetApi
 
+
 class ScicatAttach:
     """attach image to scicat"""
     api = ""
@@ -28,7 +29,7 @@ class ScicatAttach:
 
     def get_url(self):
         """get URL"""
-        uri =  self.api + self.url_fragment + "?access_token=" + self.token
+        uri = self.api + self.url_fragment + "?access_token=" + self.token
         print(uri)
         return uri
 
@@ -45,7 +46,7 @@ class ScicatAttach:
 
         token = ""
 
-        login_url =  self.api + "/Users/login"
+        login_url = self.api + "/Users/login"
         config = {
             "username": username,
             "password": password
