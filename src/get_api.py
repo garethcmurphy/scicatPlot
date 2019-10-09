@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """get api"""
+import os
 
 
 class GetApi:
