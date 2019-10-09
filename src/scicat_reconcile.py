@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 """search scicat"""
 import os
-import json
-import urllib
 
-import requests
 from scicat_search import ScicatSearch
-from get_api import GetApi
 
 
 class ScicatReconcile:

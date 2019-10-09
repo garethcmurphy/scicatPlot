@@ -102,7 +102,6 @@ class ScicatMet:
             print("file size", stats.st_size)
             return 0
 
-
         if not h5py.is_hdf5(self.file_name):
             print("Invalid file", self.file_name)
             return 0
@@ -127,7 +126,8 @@ class ScicatMet:
         run_number = int(scratch[0:-4])
 
         # run_number = 3
-        self.metadata_dict["runNumber"] = self.set_metadata(scicat_type="number", value=run_number, unit="")
+        self.metadata_dict["runNumber"] = self.set_metadata(
+            scicat_type="number", value=run_number, unit="")
 
         for i in range(1, 9):
             path = "/entry/instrument/chopper_"+str(i)+"/radius"
@@ -157,10 +157,11 @@ class ScicatMet:
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
         api = GetApi()
-        api = api.get()
+        api = api.api
         assert len(token) == 64
         # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
-        url = api + "api/v3/Datasets/updateScientificMetadata?access_token="+token
+        url = os.path.join(
+            api, "/Datasets/updateScientificMetadata?access_token="+token)
         print(url)
         response = requests.put(url, json=updated_metadata)
         print(response)

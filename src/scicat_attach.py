@@ -14,8 +14,7 @@ from get_api import GetApi
 
 class ScicatAttach:
     """attach image to scicat"""
-    url_base = ""
-    api = "api/v3/"
+    api = ""
     url_fragment = "Datasets"
     thumbnail = ""
     file = "data/nicos_00000332.hdf"
@@ -24,12 +23,12 @@ class ScicatAttach:
 
     def __init__(self):
         api = GetApi()
-        self.url_base = api.get()
+        self.api = api.api
         self.token = ""
 
     def get_url(self):
         """get URL"""
-        uri = self.url_base + self.api + self.url_fragment + "?access_token=" + self.token
+        uri =  self.api + self.url_fragment + "?access_token=" + self.token
         print(uri)
         return uri
 
@@ -46,7 +45,7 @@ class ScicatAttach:
 
         token = ""
 
-        login_url = self.url_base + self.api + "/Users/login"
+        login_url =  self.api + "/Users/login"
         config = {
             "username": username,
             "password": password
@@ -95,7 +94,7 @@ class ScicatAttach:
         """attach image to scicat"""
         self.get_access_token()
         quote_pid = urllib.parse.quote_plus(pid)
-        post_url = self.url_base + self.api + \
+        post_url = self.api + \
             "Datasets/" + quote_pid + "/attachments" + \
             "?access_token=" + self.token
         if os.path.exists(file):

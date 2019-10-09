@@ -15,7 +15,7 @@ class ScicatSearch:
     def __init__(self):
         api = GetApi()
         self.base_url = api.get()
-        self.api_url = os.path.join(self.base_url, "api/v3/")
+        self.api_url = api.api
         self.dataset_url = os.path.join(self.api_url, "Datasets/")
 
     def search_scicat(self, text, max_number_results):
