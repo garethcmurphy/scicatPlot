@@ -166,6 +166,7 @@ class ScicatMet:
     def loop(self):
         """loop files"""
         directory_name = "./data"
+        directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
         self.get_files(directory_name)
         for file in self.files:
             self.file_name = file

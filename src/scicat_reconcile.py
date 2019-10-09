@@ -14,7 +14,6 @@ class ScicatReconcile:
     data_directory = "./data/"
     missing = []
 
-   
     def walk_tree(self):
         """walk tree find files and query scicat"""
         files = os.listdir(self.data_directory)
@@ -38,7 +37,7 @@ class ScicatReconcile:
 
 def main():
     """main"""
-    reconcile=ScicatReconcile()
+    reconcile = ScicatReconcile()
     reconcile.walk_tree()
     reconcile.report_missing()
 
