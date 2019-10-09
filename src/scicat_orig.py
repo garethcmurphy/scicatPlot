@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """scicat orig"""
+import os
 import urllib
 import requests
 from file_info import FileInfo
 from get_api import GetApi
+from scicat_login import Login
 
 
 class SciCatOrig:
@@ -31,7 +33,10 @@ class SciCatOrig:
         get_api = GetApi()
         token = ""
         encode_pid = urllib.parse.quote_plus(self.pid)
-        self.uri = get_api.api + encode_pid + "/origdatablocks" + token
+        api = get_api.api
+        print("api", api)
+        token = "?access_token="
+        self.uri = api + "Datasets/" + encode_pid + "/origdatablocks" + token
         print(self.uri)
 
     def post(self):
@@ -43,16 +48,16 @@ class SciCatOrig:
         """post to scicat"""
         self.pid = pid
         self.file = file
-        self.create_json()
         self.create_uri()
+        self.create_json()
         self.post()
 
 
 def main():
     """main"""
     orig = SciCatOrig()
-    file = "data/nicos_00000763.hdf"
-    pid = "20.500.12269/763nicos_00000763.hdf"
+    file = "data/nicos_00000764.hdf"
+    pid = "20.500.12269/764nicos_00000764.hdf"
     orig.create_orig(file=file, pid=pid)
 
 
