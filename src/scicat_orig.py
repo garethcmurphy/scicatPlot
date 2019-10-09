@@ -2,6 +2,8 @@
 """scicat orig"""
 import os
 import urllib
+import json
+
 import requests
 from file_info import FileInfo
 from get_api import GetApi
@@ -31,11 +33,13 @@ class SciCatOrig:
     def create_uri(self):
         """create uri"""
         get_api = GetApi()
-        token = ""
+        login = Login()
+        token_object = login.get_access_token()
+        print("token object", token_object)
         encode_pid = urllib.parse.quote_plus(self.pid)
         api = get_api.api
         print("api", api)
-        token = "?access_token="
+        token = "?access_token="+token_object
         self.uri = api + "Datasets/" + encode_pid + "/origdatablocks" + token
         print(self.uri)
 
