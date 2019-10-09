@@ -181,7 +181,7 @@ class ScicatMet:
             self.file_name = file
             print(file)
             self.get_metadata()
-            # self.post_metadata()
+            self.post_metadata()
 
 
 def main():
