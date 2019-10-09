@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """scicat orig"""
-import os
 import urllib
-import json
 
 import requests
 from file_info import FileInfo

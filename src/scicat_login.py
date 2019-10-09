@@ -42,7 +42,7 @@ class Login:
         token = response.json()
         self.token = token["id"]
 
-        print("token id",token["id"])
+        print("token id", token["id"])
         return self.token
 
 
