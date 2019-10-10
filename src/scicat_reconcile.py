@@ -3,6 +3,7 @@
 import os
 
 from scicat_search import ScicatSearch
+from data_dir import DataDir
 
 
 class ScicatReconcile:
@@ -12,6 +13,8 @@ class ScicatReconcile:
 
     def walk_tree(self):
         """walk tree find files and query scicat"""
+        data = DataDir()
+        self.data_directory = data.directory_name
         files = os.listdir(self.data_directory)
         for file in files:
             tag = file.strip(".hdf")
