@@ -3,6 +3,7 @@
 import os
 import pprint
 import glob
+import socket
 
 import h5py
 
@@ -174,8 +175,12 @@ class ScicatMet:
         """loop files"""
         login = Login()
         self.token = login.get_access_token()
+        host_name = socket.gethostname()
         directory_name = "./data"
-        directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
+        if host_name == "CI0020036":
+            directory_name = "./data"
+        else:
+            directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
         self.get_files(directory_name)
         for file in self.files:
             self.file_name = file
