@@ -188,11 +188,13 @@ class ScicatMet:
         self.get_files(directory_name)
         orig = SciCatOrig()
         for file in self.files:
-            self.file_name = file
-            print(file)
-            self.get_metadata()
-            self.post_metadata()
-            orig.create_orig(file=self.file_name, pid=self.pid)
+            stats = os.stat(file)
+            if ( stats.st_size > 7000 ):
+                self.file_name = file
+                print(file)
+                self.get_metadata()
+                self.post_metadata()
+                orig.create_orig(file=self.file_name, pid=self.pid)
 
 
 def main():
