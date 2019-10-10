@@ -159,14 +159,18 @@ class ScicatMet:
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
+        self.create_url()
+        response = requests.put(self.url, json=updated_metadata)
+        print(response)
+
+
+    def create_url(self):
+        """create url"""
         apix = GetApi()
         self.api = apix.api
         assert len(self.token) == 64
-        # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
-        self.url = self.api+ "Datasets/updateScientificMetadata?access_token="+self.token
+        self.url = self.api + "Datasets/updateScientificMetadata?access_token="+self.token
         print(self.url)
-        response = requests.put(self.url, json=updated_metadata)
-        print(response)
 
     def get_files(self, my_dir):
         """get files """
@@ -189,7 +193,7 @@ class ScicatMet:
         orig = SciCatOrig()
         for file in self.files:
             stats = os.stat(file)
-            if ( stats.st_size > 7000 ):
+            if stats.st_size > 7000:
                 self.file_name = file
                 print(file)
                 self.get_metadata()

@@ -41,7 +41,7 @@ class Login:
         response = requests.post(login_url, data=config)
         print(response.json())
         token = response.json()
-        if (response.status_code == 200):
+        if response.status_code == 200:
             self.token = token["id"]
         else:
             print("error, can't login")

@@ -17,7 +17,7 @@ class DataDir:
 
 def main():
     """main"""
-    vis = DataDir()
+    DataDir()
 
 
 if __name__ == "__main__":
