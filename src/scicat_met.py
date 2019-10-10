@@ -12,12 +12,16 @@ import requests
 from scicat_login import Login
 from scicat_search import ScicatSearch
 from get_api import GetApi
+from scicat_orig import SciCatOrig
 
 
 class ScicatMet:
     """get metadata from nexus file """
     files = []
     token = ""
+    api = ""
+    url = ""
+    pid = ""
 
     def __init__(self):
         self.metadata_dict = {}
@@ -151,17 +155,17 @@ class ScicatMet:
         response = search.search_scicat(fragment, 1)
         print(response)
         result = response[0]
+        self.pid = result["pid"]
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
-        api = GetApi()
-        api = api.api
+        apix = GetApi()
+        self.api = apix.api
         assert len(self.token) == 64
         # token = "Gkbbx3RT2dzCgmuoqUnwQCdhmvGbukAQcI2onZD3K6j6mywXQrnHVdQPGh2Qw18W"
-        url = os.path.join(
-            api, "/Datasets/updateScientificMetadata?access_token="+self.token)
-        print(url)
-        response = requests.put(url, json=updated_metadata)
+        self.url = self.api+ "Datasets/updateScientificMetadata?access_token="+self.token
+        print(self.url)
+        response = requests.put(self.url, json=updated_metadata)
         print(response)
 
     def get_files(self, my_dir):
@@ -182,11 +186,13 @@ class ScicatMet:
         else:
             directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
         self.get_files(directory_name)
+        orig = SciCatOrig()
         for file in self.files:
             self.file_name = file
             print(file)
             self.get_metadata()
             self.post_metadata()
+            orig.create_orig(file=self.file_name, pid=self.pid)
 
 
 def main():

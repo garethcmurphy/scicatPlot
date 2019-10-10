@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """scicat login class"""
+import sys
 import platform
 
 import json
@@ -22,7 +23,7 @@ class Login:
         self.api = apix.api
         username = "ingestor"
         if platform.system() == 'Darwin':
-            password = keyring.get_password('scicat', username)
+            password = keyring.get_password('scitest', username)
         else:
             with open("config.json") as json_file:
                 data = json.load(json_file)
@@ -40,7 +41,11 @@ class Login:
         response = requests.post(login_url, data=config)
         print(response.json())
         token = response.json()
-        self.token = token["id"]
+        if (response.status_code == 200):
+            self.token = token["id"]
+        else:
+            print("error, can't login")
+            sys.exit()
 
         print("token id", token["id"])
         return self.token
