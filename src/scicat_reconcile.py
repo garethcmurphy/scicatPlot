@@ -10,6 +10,8 @@ class ScicatReconcile:
     """scicat search"""
     data_directory = "./data/"
     missing = []
+    locationUnknown = []
+    file_path = ""
 
     def walk_tree(self):
         """walk tree find files and query scicat"""
@@ -24,8 +26,20 @@ class ScicatReconcile:
             # print(result)
             if len(result) > 0:
                 print(result[0]["sourceFolder"])
+                self.file_path = result[0]["sourceFolder"]
+                file_exists = self.check_file_path()
+                if file_exists != True:
+                    self.locationUnknown.append(file)
             else:
                 self.missing.append(file)
+
+    def check_file_path(self):
+        """check file exists"""
+        file_exists = False
+        if os.path.isfile(self.file_path):
+            file_exists = True
+        return file_exists
+
 
     def report_missing(self):
         """report missing"""
