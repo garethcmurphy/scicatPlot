@@ -25,12 +25,11 @@ class ScicatVis:
         if not response:
             print("no results found, continuing")
             return 0
-        result = response.pop()
+        result = response[0]
         file_name = result["scientificMetadata"]["file_name"]
         pid = result["pid"]
         basename = os.path.basename(file_name)
 
-        plot = ScicatPlot()
         path = result["sourceFolder"]
         hostname = socket.gethostname()
         if hostname == "CI0020036":
