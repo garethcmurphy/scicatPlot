@@ -3,6 +3,8 @@
 import os
 import socket
 
+import visens
+
 
 from scicat_search import ScicatSearch
 from scicat_attach import ScicatAttach
@@ -35,17 +37,21 @@ class ScicatVis:
             path = "data/"
         file_path = os.path.join(path, basename)
         print(file_path)
-        plot.set_filename(file_path)
-        plot.plot()
+        try:
+            visens.preview(file_path, log=True, save="phs.png")
+        except TypeError as err:
+            print("Type error: {0}".format(err))
+            print("Error reading hdf5 file")
+            return 0
         attach = ScicatAttach()
         file = "phs.png"
         attach.attach(pid, file)
 
     def loop(self):
         """loop around files"""
-        for i in range(489, 490):
+        for i in range(2436, 2438):
 
-            tag = "nicos_00000"+str(i).zfill(3)
+            tag = "nicos_0000"+str(i).zfill(4)
             self.run_vis(tag)
 
 
