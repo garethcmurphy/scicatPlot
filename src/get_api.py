@@ -9,8 +9,8 @@ class GetApi:
     def __init__(self):
         # self.api = "http://127.0.0.1:3000/"
         self.base_url = "https://scitest.esss.lu.se/"
+        self.base_url = "https://scicat.esss.se/"
         self.api = os.path.join(self.base_url, "api/v3/")
-        # self.api = "https://scicat.esss.se/"
 
     def get(self):
         """get api"""
