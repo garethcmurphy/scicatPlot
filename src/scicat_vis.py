@@ -27,7 +27,9 @@ class ScicatVis:
             return 0
         result = response[0]
         file_name = result["scientificMetadata"]["file_name"]
+        print(file_name)
         pid = result["pid"]
+        print(pid)
         basename = os.path.basename(file_name)
 
         path = result["sourceFolder"]
