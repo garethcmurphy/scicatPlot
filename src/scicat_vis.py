@@ -44,6 +44,10 @@ class ScicatVis:
             print("Type error: {0}".format(err))
             print("Error reading hdf5 file")
             return 0
+        except ValueError as err:
+            print("Type error: {0}".format(err))
+            print("Error reading hdf5 file")
+            return 0
         attach = ScicatAttach()
         file = "phs.png"
         attach.attach(pid, file)
