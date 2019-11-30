@@ -26,7 +26,7 @@ class ScicatVis:
             print("no results found, continuing")
             return 0
         result = response[0]
-        file_name = result["scientificMetadata"]["file_name"]
+        file_name = result["scientificMetadata"]["file_name"]["value"]
         print(file_name)
         pid = result["pid"]
         print(pid)
