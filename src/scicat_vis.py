@@ -4,6 +4,7 @@ import os
 import socket
 
 import visens
+import h5py
 
 
 from scicat_search import ScicatSearch
@@ -39,6 +40,14 @@ class ScicatVis:
         file_path = os.path.join(path, basename)
         print(file_path)
         try:
+            with h5py.File(file_path, "r", libver="latest", swmr=True) as file:
+                pass
+                #print(file["/entry/title"])
+        except OSError as err:
+            print("OS error: {0}".format(err))
+            print("Error reading hdf5 file")
+            return 0
+        try:
             visens.preview(file_path, log=True, save="phs.png")
         except TypeError as err:
             print("Type error: {0}".format(err))
@@ -54,7 +63,7 @@ class ScicatVis:
 
     def loop(self):
         """loop around files"""
-        for i in range(2439, 2463):
+        for i in range(2457, 2463):
 
             tag = "nicos_0000"+str(i).zfill(4)
             self.run_vis(tag)
