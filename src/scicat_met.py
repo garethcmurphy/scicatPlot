@@ -108,7 +108,7 @@ class ScicatMet:
             # self.metadata_dict[base] = val[:]
             print(type(val))
             print(len(val))
-            if not val:
+            if val.size > 0:
                 max, mean, min = self.get_ave_max_min(val)
                 print(max, mean, min)
                 self.metadata_dict[tag +
