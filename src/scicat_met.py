@@ -108,21 +108,21 @@ class ScicatMet:
             # self.metadata_dict[base] = val[:]
             print(type(val))
             print(len(val))
-            max, mean, min = self.get_ave_max_min(val)
-            print(max, mean, min)
-
-            self.metadata_dict[tag +
-                               "_max"] = {"type": "measurement", "value": max, "unit": ""}
-            self.metadata_dict[tag +
-                               "_mean"] = {"type": "measurement", "value": mean, "unit": ""}
-            self.metadata_dict[tag +
-                               "_min"] = {"type": "measurement", "value": min, "unit": ""}
+            if len(val) > 0:
+                max, mean, min = self.get_ave_max_min(val)
+                print(max, mean, min)
+                self.metadata_dict[tag +
+                                "_max"] = {"type": "measurement", "value": max, "unit": ""}
+                self.metadata_dict[tag +
+                                "_mean"] = {"type": "measurement", "value": mean, "unit": ""}
+                self.metadata_dict[tag +
+                                "_min"] = {"type": "measurement", "value": min, "unit": ""}
 
             print(path)
         else:
             print("path missing", path)
             return 0
-        return val
+        return 0
 
     def get_metadata(self):
         """read nexus file"""
