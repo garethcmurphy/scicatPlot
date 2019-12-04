@@ -23,7 +23,7 @@ class Login:
         self.api = apix.api
         username = "ingestor"
         if platform.system() == 'Darwin':
-            password = keyring.get_password('scitest', username)
+            password = keyring.get_password('scicat', username)
         else:
             with open("config.json") as json_file:
                 data = json.load(json_file)

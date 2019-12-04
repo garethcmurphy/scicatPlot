@@ -6,6 +6,7 @@ import glob
 import socket
 
 import h5py
+import numpy as np
 
 import requests
 
@@ -78,22 +79,46 @@ class ScicatMet:
 
     def get_ave_max_min(self, array):
         """get max mean and min"""
-        maximum = max(array)
-        mean = sum(array)/len(array)
-        minimum = min(array)
+        maximum = np.max(array)
+        mean = np.mean(array)
+        minimum = np.min(array)
         return maximum, mean, minimum
 
     def look_for_arrays(self):
         """check which arrays are populated"""
 
-    def get_array(self, path):
+    def get_event_num(self, tag, path):
+        """get event num"""
+        val = ""
+        if path in self.file:
+            val = self.file[path][()]
+            count_events = len(val)
+            self.metadata_dict[tag] = {
+                "type": "number", "value": count_events, "unit": ""}
+        else:
+            print("path missing", path)
+            return 0
+        return 0
+
+    def get_array(self, tag,  path):
         """get dataset from file"""
         val = ""
         if path in self.file:
             val = self.file[path][()]
             # self.metadata_dict[base] = val[:]
+            print(type(val))
+            print(len(val))
+            max, mean, min = self.get_ave_max_min(val)
+            print(max, mean, min)
 
-            print(path, val)
+            self.metadata_dict[tag +
+                               "_max"] = {"type": "measurement", "value": max, "unit": ""}
+            self.metadata_dict[tag +
+                               "_mean"] = {"type": "measurement", "value": mean, "unit": ""}
+            self.metadata_dict[tag +
+                               "_min"] = {"type": "measurement", "value": min, "unit": ""}
+
+            print(path)
         else:
             print("path missing", path)
             return 0
@@ -126,6 +151,10 @@ class ScicatMet:
         self.get_dataset("start_time", path)
         path = "/"
         self.get_attribute("file_name", path)
+        path = "/entry/sample/temperature5/value"
+        self.get_array("sample_temperature5", path)
+        path = "/entry/monitor_1/events/event_id"
+        self.get_event_num("count_events", path)
 
         scratch = self.file_name.split("_").pop()
         run_number = int(scratch[0:-4])
@@ -163,7 +192,6 @@ class ScicatMet:
         response = requests.put(self.url, json=updated_metadata)
         print(response)
 
-
     def create_url(self):
         """create url"""
         apix = GetApi()
@@ -188,7 +216,7 @@ class ScicatMet:
         if host_name == "CI0020036":
             directory_name = "./data"
         else:
-            directory_name = "/nfs/groups/beamlines/v20/DD1F5G"
+            directory_name = "/nfs/groups/beamlines/v20/YC7SZ5"
         self.get_files(directory_name)
         orig = SciCatOrig()
         for file in self.files:
@@ -197,8 +225,8 @@ class ScicatMet:
                 self.file_name = file
                 print(file)
                 self.get_metadata()
-                self.post_metadata()
-                orig.create_orig(file=self.file_name, pid=self.pid)
+                # self.post_metadata()
+                #orig.create_orig(file=self.file_name, pid=self.pid)
 
 
 def main():
