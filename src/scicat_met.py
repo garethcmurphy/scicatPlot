@@ -4,6 +4,8 @@ import os
 import pprint
 import glob
 import socket
+import urllib
+import urllib.parse
 
 import h5py
 import numpy as np
@@ -100,7 +102,7 @@ class ScicatMet:
             return 0
         return 0
 
-    def get_array(self, tag,  path):
+    def get_array(self, tag, path):
         """get dataset from file"""
         val = ""
         if path in self.file:
@@ -109,14 +111,14 @@ class ScicatMet:
             print(type(val))
             print(len(val))
             if val.size > 0:
-                max, mean, min = self.get_ave_max_min(val)
-                print(max, mean, min)
+                max_arr, mean_arr, min_arr = self.get_ave_max_min(val)
+                print(max_arr, mean_arr, min_arr)
                 self.metadata_dict[tag +
-                                "_max"] = {"type": "measurement", "value": max, "unit": ""}
+                                   "_max"] = {"type": "measurement", "value": max_arr, "unit": ""}
                 self.metadata_dict[tag +
-                                "_mean"] = {"type": "measurement", "value": mean, "unit": ""}
+                                   "_mean"] = {"type": "measurement", "value": mean_arr, "unit": ""}
                 self.metadata_dict[tag +
-                                "_min"] = {"type": "measurement", "value": min, "unit": ""}
+                                   "_min"] = {"type": "measurement", "value": min_arr, "unit": ""}
 
             print(path)
         else:
@@ -188,16 +190,19 @@ class ScicatMet:
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
-        self.create_url()
+        pid_encode = urllib.parse.quote_plus(self.pid)
+        self.create_url(pid_encode)
         response = requests.put(self.url, json=updated_metadata)
-        print(response)
+        print(response.json())
 
-    def create_url(self):
+    def create_url(self, pid):
         """create url"""
         apix = GetApi()
         self.api = apix.api
         assert len(self.token) == 64
-        self.url = self.api + "Datasets/updateScientificMetadata?access_token="+self.token
+        #self.url = self.api + "Datasets/updateScientificMetadata?access_token="+self.token
+        self.url = self.api + "Datasets/" + pid + \
+            "/replace" + "?access_token="+self.token
         print(self.url)
 
     def get_files(self, my_dir):
@@ -220,7 +225,7 @@ class ScicatMet:
         self.get_files(directory_name)
         orig = SciCatOrig()
         for file in self.files:
-            
+
             stats = os.stat(file)
             if stats.st_size > 7000:
                 self.file_name = file

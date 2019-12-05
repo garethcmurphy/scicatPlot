@@ -9,7 +9,6 @@ import h5py
 
 from scicat_search import ScicatSearch
 from scicat_attach import ScicatAttach
-from scicat_plot import ScicatPlot
 
 
 class ScicatVis:
