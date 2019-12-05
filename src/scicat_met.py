@@ -47,7 +47,7 @@ class ScicatMet:
     def get_size(self):
         """get file size"""
         stats = os.stat(self.file_name)
-        return stats.st_size;
+        return stats.st_size
 
 
     def get_attribute(self, key, path):
@@ -150,7 +150,7 @@ class ScicatMet:
         except OSError as err:
             print("OS error: {0}".format(err))
             print("Error reading hdf5 file")
-            return 
+            return
         self.file = h5py.File(self.file_name, "r", swmr=True)
 
         path = "/entry/title"
