@@ -85,7 +85,7 @@ class ScicatAttach:
         assert isinstance(encode, str)
         payload = {
             "thumbnail": encode,
-            "caption": "Time of flight",
+            "caption": "Time-of-flight",
             "datasetId": pid
         }
         # print(payload)
