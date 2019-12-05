@@ -161,18 +161,15 @@ class ScicatMet:
         scratch = self.file_name.split("_").pop()
         run_number = int(scratch[0:-4])
 
-        # run_number = 3
         self.metadata_dict["runNumber"] = self.set_metadata(
             scicat_type="number", value=run_number, unit="")
 
-        for i in range(1, 9):
-            path = "/entry/instrument/chopper_"+str(i)+"/radius"
-            self.get_dataset("chopper_"+str(i)+"_radius", path)
-            path = "/entry/instrument/chopper_"+str(i)+"/name"
-            self.get_dataset("chopper_"+str(i)+"_name", path)
+        #for i in range(1, 9):
+        #    path = "/entry/instrument/chopper_"+str(i)+"/radius"
+        #    self.get_dataset("chopper_"+str(i)+"_radius", path)
+        #    path = "/entry/instrument/chopper_"+str(i)+"/name"
+        #    self.get_dataset("chopper_"+str(i)+"_name", path)
 
-        #path = "/entry/instrument/tilting_angle_2/velocity/value"
-        # self.get_array(path)
 
         print("\n\n")
         printer = pprint.PrettyPrinter(indent=4)
@@ -192,7 +189,7 @@ class ScicatMet:
         print(updated_metadata)
         pid_encode = urllib.parse.quote_plus(self.pid)
         self.create_url(pid_encode)
-        response = requests.put(self.url, json=updated_metadata)
+        response = requests.post(self.url, json=updated_metadata)
         print(response.json())
 
     def create_url(self, pid):
