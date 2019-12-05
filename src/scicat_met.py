@@ -169,7 +169,7 @@ class ScicatMet:
         self.get_attribute("file_name", path)
         path = "/entry/sample/temperature5/value"
         self.get_array("sample_temperature5", path)
-        path = "/entry/monitor_1/events/event_id"
+        path = "/entry/instrument/detector_1/raw_event_data/event_id"
         self.get_event_num("count_events", path)
 
         scratch = self.file_name.split("_").pop()
