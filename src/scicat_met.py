@@ -121,7 +121,7 @@ class ScicatMet:
             print(beg, end)
             diff = end - beg
             print(diff)
-            self.metadata_dict[tag] = {"type": "measurement", "value": str(diff), "unit": "s"}
+            self.metadata_dict[tag] = {"type": "measurement", "value": str(round(diff)), "unit": "s"}
             return diff
         return 0
 
