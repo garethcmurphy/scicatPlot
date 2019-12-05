@@ -98,6 +98,7 @@ class ScicatAttach:
         post_url = self.api + \
             "Datasets/" + quote_pid + "/attachments" + \
             "?access_token=" + self.token
+        response = requests.delete(post_url)
         if os.path.exists(file):
             pass
         else:
