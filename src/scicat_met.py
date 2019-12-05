@@ -49,7 +49,6 @@ class ScicatMet:
         stats = os.stat(self.file_name)
         return stats.st_size
 
-
     def get_attribute(self, key, path):
         """get dataset from file"""
         val = ""
@@ -108,6 +107,22 @@ class ScicatMet:
             return 0
         return 0
 
+    def get_elapsed_time(self, tag, path):
+        """get dataset from file"""
+        val = ""
+        if path in self.file:
+            val = self.file[path][()]
+            print(type(val))
+            print(len(val))
+            beg = val[0]/1e9
+            end = val[-1]/1e9
+            print(beg, end)
+            diff = end - beg
+            print(diff)
+            self.metadata_dict[tag] = {"type": "measurement", "value": str(diff), "unit": "s"}
+            return diff
+        return 0
+
     def get_array(self, tag, path):
         """get dataset from file"""
         val = ""
@@ -146,7 +161,7 @@ class ScicatMet:
         try:
             with h5py.File(self.file_name, "r", libver="latest", swmr=True) as file:
                 pass
-                #print(file["/entry/title"])
+                # print(file["/entry/title"])
         except OSError as err:
             print("OS error: {0}".format(err))
             print("Error reading hdf5 file")
@@ -171,6 +186,8 @@ class ScicatMet:
         self.get_array("sample_temperature5", path)
         path = "/entry/instrument/detector_1/raw_event_data/event_id"
         self.get_event_num("count_events", path)
+        path = "/entry/monitor_1/events/event_time_zero"
+        self.get_elapsed_time("elapsed_time", path)
 
         scratch = self.file_name.split("_").pop()
         run_number = int(scratch[0:-4])
@@ -178,12 +195,11 @@ class ScicatMet:
         self.metadata_dict["runNumber"] = self.set_metadata(
             scicat_type="number", value=run_number, unit="")
 
-        #for i in range(1, 9):
+        # for i in range(1, 9):
         #    path = "/entry/instrument/chopper_"+str(i)+"/radius"
         #    self.get_dataset("chopper_"+str(i)+"_radius", path)
         #    path = "/entry/instrument/chopper_"+str(i)+"/name"
         #    self.get_dataset("chopper_"+str(i)+"_name", path)
-
 
         print("\n\n")
         printer = pprint.PrettyPrinter(indent=4)
@@ -195,7 +211,7 @@ class ScicatMet:
         fragment = os.path.basename(self.file_name).replace(".hdf", "")
         print(fragment)
         response = search.search_scicat(fragment, 1)
-        #print(response)
+        # print(response)
         result = response[0]
         self.pid = result["pid"]
         size = self.get_size()
@@ -203,11 +219,11 @@ class ScicatMet:
             result["size"] = size
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
-        #print(updated_metadata)
+        # print(updated_metadata)
         pid_encode = urllib.parse.quote_plus(self.pid)
         self.create_url(pid_encode)
         response = requests.post(self.url, json=updated_metadata)
-        #print(response.json())
+        # print(response.json())
 
     def create_url(self, pid):
         """create url"""
