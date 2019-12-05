@@ -47,7 +47,7 @@ class ScicatVis:
             print("Error reading hdf5 file")
             return 0
         try:
-            visens.preview(file_path, log=True, save="phs.png")
+            visens.preview(file_path, log=True, layout="auto", save="phs.png")
         except TypeError as err:
             print("Type error: {0}".format(err))
             print("Error reading hdf5 file")
