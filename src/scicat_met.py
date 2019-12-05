@@ -195,7 +195,7 @@ class ScicatMet:
         fragment = os.path.basename(self.file_name).replace(".hdf", "")
         print(fragment)
         response = search.search_scicat(fragment, 1)
-        print(response)
+        #print(response)
         result = response[0]
         self.pid = result["pid"]
         size = self.get_size()
@@ -203,11 +203,11 @@ class ScicatMet:
             result["size"] = size
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
-        print(updated_metadata)
+        #print(updated_metadata)
         pid_encode = urllib.parse.quote_plus(self.pid)
         self.create_url(pid_encode)
         response = requests.post(self.url, json=updated_metadata)
-        print(response.json())
+        #print(response.json())
 
     def create_url(self, pid):
         """create url"""
