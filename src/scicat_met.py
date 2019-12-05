@@ -137,7 +137,15 @@ class ScicatMet:
         if not h5py.is_hdf5(self.file_name):
             print("Invalid file", self.file_name)
             return 0
-        self.file = h5py.File(self.file_name, "r")
+        try:
+            with h5py.File(self.file_name, "r", libver="latest", swmr=True) as file:
+                pass
+                #print(file["/entry/title"])
+        except OSError as err:
+            print("OS error: {0}".format(err))
+            print("Error reading hdf5 file")
+            return 
+        self.file = h5py.File(self.file_name, "r", swmr=True)
 
         path = "/entry/title"
         self.get_dataset("title", path)
