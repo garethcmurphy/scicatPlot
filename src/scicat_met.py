@@ -123,7 +123,6 @@ class ScicatMet:
             print(diff)
             rounded = round(diff)
             int_diff = int(rounded)
-            
             self.metadata_dict[tag] = {"type": "measurement", "value": int_diff, "unit": "s"}
             return diff
         return 0
@@ -172,6 +171,7 @@ class ScicatMet:
             print("Error reading hdf5 file")
             return
         self.file = h5py.File(self.file_name, "r", swmr=True)
+        self.metadata_dict = {}
 
         path = "/entry/title"
         self.get_dataset("title", path)
