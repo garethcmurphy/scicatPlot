@@ -106,3 +106,5 @@ data
 .DS_Store
 config.json
 phs.png
+
+.idea
