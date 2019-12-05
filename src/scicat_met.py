@@ -114,7 +114,7 @@ class ScicatMet:
             val = self.file[path][()]
             print(type(val))
             print(len(val))
-            if len(val) > 0:
+            if val.size > 0:
                 return 0
             beg = val[0]/1e9
             end = val[-1]/1e9
