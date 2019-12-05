@@ -44,6 +44,12 @@ class ScicatMet:
         obj = {"type": scicat_type, "unit": unit, "value": value}
         return obj
 
+    def get_size(self):
+        """get file size"""
+        stats = os.stat(self.file_name)
+        return stats.st_size;
+
+
     def get_attribute(self, key, path):
         """get dataset from file"""
         val = ""
@@ -192,6 +198,9 @@ class ScicatMet:
         print(response)
         result = response[0]
         self.pid = result["pid"]
+        size = self.get_size()
+        if result["size"] == 0:
+            result["size"] = size
         updated_metadata = result
         updated_metadata["scientificMetadata"] = self.metadata_dict
         print(updated_metadata)
