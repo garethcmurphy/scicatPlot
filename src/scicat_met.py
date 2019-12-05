@@ -214,6 +214,7 @@ class ScicatMet:
         """get files """
         self.files = glob.glob(my_dir + '/**.*', recursive=True)
         print("getting files")
+        self.files.sort()
         print(self.files)
         return self.files
 
