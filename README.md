@@ -1,15 +1,31 @@
-# scicatPlot
+# **SciCatPlot** 📊✨  
+**Automated Plotting and Attachment Tool for Neutron Experiments**
 
-Automated plots of neutron experiments and attachment to data catalogue
+---
 
-- Query data catalogue for data files by name
-- Create plots automatically
-- Upload as attachments to catalogue
+## **Overview** 🌟  
 
-## Getting Started
+**SciCatPlot** is a Python-based tool designed to streamline the visualization and cataloging of neutron experiment data in the **SciCat data catalogue**.  
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+- 🔍 **Query**: Fetch data files directly from the data catalogue by name or metadata.  
+- 📈 **Plot**: Generate high-quality plots from neutron experiment data automatically.  
+- 📎 **Attach**: Upload plots as attachments to the corresponding entries in the SciCat data catalogue.  
 
+This tool simplifies experiment documentation and enhances accessibility to visualized data for researchers.
+
+---
+
+## **Features** 🚀  
+
+- **Automated Plot Creation**: Generates insightful plots from experiment data files with minimal input.  
+- **Data Catalogue Integration**: Seamlessly connects to SciCat for querying data files by name or metadata.  
+- **Streamlined Workflow**: Automatically uploads generated plots as attachments to the SciCat catalogue, keeping your dataset entries organized and visually informative.  
+
+---
+
+## **Why SciCatPlot?** 🤔  
+
+SciCatPlot eliminates the repetitive manual process of querying, visualizing, and attaching neutron experiment data. It ensures researchers spend more time analyzing results and less time managing metadata and files.
 ### Prerequisites
 
 What things you need to install the software and how to install them
